@@ -2749,9 +2749,9 @@ function updateViewInner () {
     ui.area.markdown.html(slides)
     console.log("before")
     console.log(ui.area.markdown.html())
-    console.log("initalize :" + window.RevealMarkdown.initialize())
     window.RevealMarkdown.initialize()
-    console.log("after: " + ui.area.markdown.html())
+    console.log("after :")
+    console.log(ui.area.markdown.html())
         // prevent XSS
     //ui.area.markdown.html(preventXSS(ui.area.markdown.html()))
     ui.area.markdown.addClass('slides')
