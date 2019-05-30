@@ -2749,7 +2749,7 @@ function updateViewInner () {
     ui.area.markdown.html(slides)
     window.RevealMarkdown.initialize()
         // prevent XSS
-    ui.area.markdown.html(preventXSS(ui.area.markdown.html()))
+    //ui.area.markdown.html(preventXSS(ui.area.markdown.html()))
     ui.area.markdown.addClass('slides')
     appState.syncscroll = false
     checkSyncToggle()
