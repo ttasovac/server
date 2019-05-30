@@ -2747,7 +2747,10 @@ function updateViewInner () {
     }
     var slides = window.RevealMarkdown.slidify(editor.getValue(), slideOptions)
     ui.area.markdown.html(slides)
+    console.log("before :" + slides)
+    console.log("initalize :" + window.RevealMarkdown.initialize())
     window.RevealMarkdown.initialize()
+    console.log("after: " + ui.area.markdown)
         // prevent XSS
     //ui.area.markdown.html(preventXSS(ui.area.markdown.html()))
     ui.area.markdown.addClass('slides')
