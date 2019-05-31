@@ -2747,18 +2747,19 @@ function updateViewInner () {
     }
     var slides = window.RevealMarkdown.slidify(editor.getValue(), slideOptions)
     ui.area.markdown.html(slides)
-    console.log("before")
-    console.log(ui.area.markdown.html())
+    //console.log("before")
+    //console.log(ui.area.markdown.html())
     //window.RevealMarkdown.initialize()
     window.RevealMarkdown.processSlides()
     window.RevealMarkdown.convertSlides()
-    console.log("after :")
-    console.log(ui.area.markdown.html())
+    //console.log("after :")
+    //console.log(ui.area.markdown.html())
     slidifyDataAttrs()
         // prevent XSS
-    ui.area.markdown.html(preventXSS(ui.area.markdown.html()))
+    //ui.area.markdown.html(preventXSS(ui.area.markdown.html()))
     ui.area.markdown.addClass('slides')
-    appState.syncscroll = false
+    //check what happens with scrolling
+    appState.syncscroll = true
     checkSyncToggle()
   } else {
     if (lastMeta.type && lastMeta.type === 'slide') {
@@ -2799,7 +2800,20 @@ function updateViewInner () {
 }
 
 function slidifyDataAttrs() {
-  $('*[data-markdown][data-background]').each(function(index,value){$(this).css("background-color", $(this).data('background'))});
+  console.log ("process data-background-color")
+  $('*[data-markdown][data-background-color').each(function(index,value){
+    $(this).css({"background-color": $(this).data('background-color')})
+  });
+  //why is data-background allowed for colors, why not insist
+  //on data-background-color; check!
+  console.log("process data-background #")
+  $('*[data-markdown][data-background^="#"]').each(function(index,value){
+    $(this).css({"background-color": $(this).data('background')})
+  });
+  console.log("process data-background not #")
+  $('*[data-markdown][data-background]:not([data-background^="#"])').each(function(index,value){
+      $(this).css({"background-image": "url('" + $(this).data('background') + "')"})
+  });
 }
 
 var updateHistoryDebounce = 600
