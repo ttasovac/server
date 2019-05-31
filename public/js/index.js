@@ -2749,9 +2749,7 @@ function updateViewInner () {
     ui.area.markdown.html(slides)
     //console.log("before")
     //console.log(ui.area.markdown.html())
-    //window.RevealMarkdown.initialize()
-    window.RevealMarkdown.processSlides()
-    window.RevealMarkdown.convertSlides()
+    window.RevealMarkdown.initialize()
     //console.log("after :")
     //console.log(ui.area.markdown.html())
     slidifyDataAttrs()
@@ -2798,20 +2796,28 @@ function updateViewInner () {
   if (postUpdateEvent && typeof postUpdateEvent === 'function') { postUpdateEvent() }
 }
 
+
 function slidifyDataAttrs() {
-  console.log ("process data-background-color")
-  $('*[data-markdown][data-background-color').each(function(index,value){
+
+  $('*[data-background-color').each(function(index,value){
     $(this).css({"background-color": $(this).data('background-color')})
   });
   //why is data-background allowed for colors, why not insist
   //on data-background-color; check!
-  console.log("process data-background #")
-  $('*[data-markdown][data-background^="#"]').each(function(index,value){
+  $('*[data-background^="#"]').each(function(index,value){
     $(this).css({"background-color": $(this).data('background')})
   });
-  console.log("process data-background not #")
-  $('*[data-markdown][data-background]:not([data-background^="#"])').each(function(index,value){
+  $('*[data-background]:not([data-background^="#"])').each(function(index,value){
       $(this).css({"background-image": "url('" + $(this).data('background') + "')"})
+  });
+  $('*[data-background-repeat').each(function(index,value){
+    $(this).css({"background-repeat": $(this).data('background-repeat')})
+  });
+  $('*[data-background-size').each(function(index,value){
+    $(this).css({"background-size": $(this).data('background-size')})
+  });
+  $('*[data-color]').each(function(index,value){
+      $(this).css({"color": $(this).data('color')})
   });
 }
 
