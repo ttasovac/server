@@ -2749,11 +2749,14 @@ function updateViewInner () {
     ui.area.markdown.html(slides)
     console.log("before")
     console.log(ui.area.markdown.html())
-    window.RevealMarkdown.initialize()
+    //window.RevealMarkdown.initialize()
+    window.RevealMarkdown.processSlides()
+    window.RevealMarkdown.convertSlides()
     console.log("after :")
     console.log(ui.area.markdown.html())
+    slidifyDataAttrs()
         // prevent XSS
-    //ui.area.markdown.html(preventXSS(ui.area.markdown.html()))
+    ui.area.markdown.html(preventXSS(ui.area.markdown.html()))
     ui.area.markdown.addClass('slides')
     appState.syncscroll = false
     checkSyncToggle()
@@ -2793,6 +2796,10 @@ function updateViewInner () {
     // buildMap();
   updateTitleReminder()
   if (postUpdateEvent && typeof postUpdateEvent === 'function') { postUpdateEvent() }
+}
+
+function slidifyDataAttrs() {
+  $('*[data-markdown][data-background]').each(function(index,value){$(this).css("background-color", $(this).data('background'))});
 }
 
 var updateHistoryDebounce = 600
