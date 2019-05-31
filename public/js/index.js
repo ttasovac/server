@@ -2758,8 +2758,7 @@ function updateViewInner () {
         // prevent XSS
     //ui.area.markdown.html(preventXSS(ui.area.markdown.html()))
     ui.area.markdown.addClass('slides')
-    //check what happens with scrolling
-    appState.syncscroll = true
+    appState.syncscroll = false
     checkSyncToggle()
   } else {
     if (lastMeta.type && lastMeta.type === 'slide') {
